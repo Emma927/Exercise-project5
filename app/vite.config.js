@@ -36,6 +36,7 @@ export default defineConfig({
     setupFiles: ['./setupTests.js'], // <- inicjalizacja jest-dom
     //Jeśli chcesz uruchomić więcej niż jeden plik setup:
     // setupFiles: ["./vitest.setup.js", "./anotherSetup.js"]
+    passWithNoTests: true, // <- pozwala zakończyć testy sukcesem jeśli brak plików
   },
   plugins: [react()],
   resolve: {
