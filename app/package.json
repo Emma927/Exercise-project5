@@ -13,6 +13,7 @@
     "test": "vitest run --",
     "coverage": "vitest run -- --coverage",
     "e2e": "npx playwright test --ui",
+    "test:e2e-ci": "npx playwright test",
     "testing-tool": "set TESTING_TOOL=true& playwright test --ui",
     "start": "serve -s dist -l 3000"
   },
