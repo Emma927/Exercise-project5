@@ -17,7 +17,7 @@ RUN npm test
 
 # Instalacja zależności systemowych i przeglądarki Chromium dla Playwright
 # Musi być wykonane przez roota.
-RUN npx playwright install --with-deps chromium
+RUN npx playwright install --with-deps
 
 # 3. Uruchomienie testów E2E (Playwright, używając nowego skryptu 'test:e2e-ci')
 RUN npm run test:e2e-ci
