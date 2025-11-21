@@ -43,7 +43,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
 
 # Instalacja tylko zależności produkcyjnych, BEZ vite (Vite nie jest potrzebny do serwowania)
-RUN npm install --only=production
+RUN npm install --only=production --ignore-scripts
 
 # Utworzenie bezpiecznego użytkownika nieuprzywilejowanego
 RUN adduser -D vitejs
