@@ -17,8 +17,10 @@ RUN npm test
 
 # Instalacja zależności systemowych i przeglądarki Chromium dla Playwright
 # Musi być wykonane przez roota.
-RUN npx playwright install --with-deps chromium
+RUN npx playwright install --with-deps
 
+# 3. Uruchomienie testów E2E (Playwright, używając nowego skryptu 'test:e2e-ci')
+RUN npm run test:e2e-ci
 
 # --- STAGE 2: BUDOWANIE APLIKACJI (Kompilacja frontendu) ---
 # Używamy etapu development/test_runner jako bazy, bo ma już zainstalowane wszystkie zależności (vite, babel itp.)
@@ -41,7 +43,7 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/package.json ./package.json
 
 # Instalacja tylko zależności produkcyjnych, BEZ vite (Vite nie jest potrzebny do serwowania)
-RUN npm install --only=production
+RUN npm install --only=production --ignore-scripts
 
 # Utworzenie bezpiecznego użytkownika nieuprzywilejowanego
 RUN adduser -D vitejs
