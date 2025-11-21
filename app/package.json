@@ -15,7 +15,7 @@
     "e2e": "npx playwright test --ui",
     "test:e2e-ci": "npx playwright test ./e2e",
     "testing-tool": "set TESTING_TOOL=true& playwright test --ui",
-    "start": "serve -s dist -l 3000"
+    "start:e2e": "serve -s dist -l 3000"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -60,13 +60,14 @@
     "prettier": "^3.6.2",
     "sass": "^1.94.2",
     "vite": "^7.2.4",
-    "vitest": "^4.0.11"
+    "vitest": "^4.0.11",
+    "wait-on": "^9.0.3"
   },
   "engines": {
     "node": "24"
   },
-    "overrides": {
-    "glob": ">=10.5.0" 
+  "overrides": {
+    "glob": ">=10.5.0"
   },
   "resolutions": {
     "glob": ">=10.5.0"
