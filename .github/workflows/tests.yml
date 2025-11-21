@@ -36,8 +36,7 @@ jobs:
         - name: Checkout code
           uses: actions/checkout@v4
         - name: Trivy scan source code
-        #   uses: aquasecurity/trivy-action@master - próbuję stabilnej wesji v0.1.77
-          uses: aquasecurity/trivy-action@v0.1.7
+          uses: aquasecurity/trivy-action@master
           with:
             scan-type: fs # <-- MUSI być 'fs', aby użyć parametru 'path'
             path: ./app   # <-- Ten parametr jest prawidłowy tylko dla scan-type: fs # Dostosuj ścieżkę do Twojego kodu źródłowego
