@@ -3,7 +3,7 @@ services:
     image: node:24
     container_name: e-commerce2
     volumes:
-      - .:/app
+      - ./app:/app
     working_dir: /app
     user: "${USER_ID}:${GROUP_ID}"
     tty: true
