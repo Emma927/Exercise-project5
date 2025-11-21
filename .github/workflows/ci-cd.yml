@@ -68,8 +68,7 @@ jobs:
           GITHUB_REF_NAME: ${{ github.ref_name }}
 
       - name: Trivy Scan
-        # uses: aquasecurity/trivy-action@master - próbuję stabilnej wesji v0.1.7
-        uses: aquasecurity/trivy-action@v0.1.7
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: ghcr.io/${{ env.GH_REPO_LC }}:${{ env.TAG_NAME }}
           format: 'table'
