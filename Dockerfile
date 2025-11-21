@@ -29,6 +29,30 @@ FROM test_runner AS builder
 # Budowanie aplikacji (tworzenie katalogu 'dist')
 RUN npm run build
 
+#ALBO nginx:
+# --- STAGE 3: SERWOWANIE GOTOWEJ APLIKACJI PRZEZ NGINX ---
+# Używamy lekkiego, bezpiecznego obrazu Nginx Alpine
+FROM nginx:alpine AS production_nginx
+
+# Usuwamy domyślny plik konfiguracyjny Nginx, jeśli chcemy użyć własnego
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Kopiujemy pliki wynikowe z etapu build do domyślnego katalogu serwowania Nginx
+# Nginx domyślnie szuka plików w /usr/share/nginx/html
+COPY --from=builder /app/dist /usr/share/nginx/html
+
+# Opcjonalnie: Kopiowanie niestandardowego pliku konfiguracyjnego Nginx (jeśli masz złożoną konfigurację)
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Nginx domyślnie działa na porcie 80 i ma wbudowany CMD, nie potrzebujesz npm start
+
+# Odsłonięcie portu (domyślny port Nginx)
+EXPOSE 80
+
+# Domyślny CMD Nginx uruchamia serwer. Nie ruszaj tej linii.
+CMD ["nginx", "-g", "daemon off;"]
+
+
 # # --- STAGE 3: SERWOWANIE GOTOWEJ APLIKACJI (Bezpieczne środowisko produkcyjne) ---
 # # Używamy lekkiego obrazu Alpine
 # FROM node:24-alpine AS production
@@ -66,26 +90,3 @@ RUN npm run build
 # # Odsłonięcie portu (domyślnie 3000 w dev, ale w prod może to być inny port, np. 8080 dla Nginx/serve)
 # EXPOSE 3000
 # #Dodaktowo potrzbne zainstalowanie przy node npm install serve --save 
-
-#ALBO nginx:
-# --- STAGE 3: SERWOWANIE GOTOWEJ APLIKACJI PRZEZ NGINX ---
-# Używamy lekkiego, bezpiecznego obrazu Nginx Alpine
-FROM nginx:alpine AS production_nginx
-
-# Usuwamy domyślny plik konfiguracyjny Nginx, jeśli chcemy użyć własnego
-RUN rm /etc/nginx/conf.d/default.conf
-
-# Kopiujemy pliki wynikowe z etapu build do domyślnego katalogu serwowania Nginx
-# Nginx domyślnie szuka plików w /usr/share/nginx/html
-COPY --from=builder /app/dist /usr/share/nginx/html
-
-# Opcjonalnie: Kopiowanie niestandardowego pliku konfiguracyjnego Nginx (jeśli masz złożoną konfigurację)
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Nginx domyślnie działa na porcie 80 i ma wbudowany CMD, nie potrzebujesz npm start
-
-# Odsłonięcie portu (domyślny port Nginx)
-EXPOSE 80
-
-Domyślny CMD Nginx uruchamia serwer. Nie ruszaj tej linii.
-CMD ["nginx", "-g", "daemon off;"]
