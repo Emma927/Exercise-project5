@@ -31,7 +31,7 @@ export default defineConfig({
     // -nie renderuje komponentu w prawdziwej przeglądarce, tylko tworzy symulowany DOM (za pomocą jsdom) — w pamięci, w środowisku testowym.
     globals: true, // <- dodajemy globalne expect, test, describe - umożliwia to pomijanie importów:describe, expect, czy test z bibloteki vitest
     include: ['**/*.{spec,test}.{js,jsx}'],
-    exclude: ['**/e2e/**'],
+    exclude: ['**/node_modules/**', '**/dist/**', '**/e2e/**'],
     //setupFiles w konfiguracji Vitest (vitest.config.js) służy do inicjalizacji środowiska testowego przed każdym testem. Dzięki temu nie musisz powtarzać importu w każdym pliku testowym.
     setupFiles: ['./setupTests.js'], // <- inicjalizacja jest-dom
     //Jeśli chcesz uruchomić więcej niż jeden plik setup:
