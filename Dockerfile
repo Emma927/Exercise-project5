@@ -44,6 +44,13 @@ COPY --from=builder /app/dist /usr/share/nginx/html
 # Opcjonalnie: Kopiowanie niestandardowego pliku konfiguracyjnego Nginx (jeśli masz złożoną konfigurację)
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
+# DODAJ TE DWIE LINIE: Zmień właściciela katalogów cache na użytkownika nginx
+# RUN chown -R nginx:nginx /var/cache/nginx
+# RUN chown -R nginx:nginx /var/run
+
+# Jawne przełączenie na ISTNIEJĄCEGO użytkownika 'nginx'
+# USER nginx
+
 # Nginx domyślnie działa na porcie 80 i ma wbudowany CMD, nie potrzebujesz npm start
 
 # Odsłonięcie portu (domyślny port Nginx)
