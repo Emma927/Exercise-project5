@@ -32,7 +32,7 @@ export default defineConfig({
     globals: true, // <- dodajemy globalne expect, test, describe - umożliwia to pomijanie importów:describe, expect, czy test z bibloteki vitest
     include: ['**/*.{spec,test}.{js,jsx}'],
     //setupFiles w konfiguracji Vitest (vitest.config.js) służy do inicjalizacji środowiska testowego przed każdym testem. Dzięki temu nie musisz powtarzać importu w każdym pliku testowym.
-    setupFiles: ['./setupTestes.js'], // <- inicjalizacja jest-dom
+    setupFiles: ['./setupTests.js'], // <- inicjalizacja jest-dom
     //Jeśli chcesz uruchomić więcej niż jeden plik setup:
     // setupFiles: ["./vitest.setup.js", "./anotherSetup.js"]
   },
