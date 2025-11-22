@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
 
-import "dotenv/config"; // import żeby mieć dostęp do zmiennych środowiskowych
+//import "dotenv/config"; // import żeby mieć dostęp do zmiennych środowiskowych
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -14,8 +14,8 @@ import "dotenv/config"; // import żeby mieć dostęp do zmiennych środowiskowy
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
-  // testDir: './e2e',
-  testDir: process.env.TESTING_TOOL === "true" ? "./testingTool" : "./e2e",
+  testDir: './e2e',
+  // testDir: process.env.TESTING_TOOL === "true" ? "./testingTool" : "./e2e", - na razie zakomentowane, nie używam testing tool
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */

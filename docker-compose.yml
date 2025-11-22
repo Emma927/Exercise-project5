@@ -3,11 +3,11 @@ services:
     image: node:24
     container_name: e-commerce2
     volumes:
-      - .:/app
+      - ./app:/app
     working_dir: /app
     user: "${USER_ID}:${GROUP_ID}"
     tty: true
     ports:
-      - "3001:3000"
+      - "3000:3000"
     env_file:
       - .env

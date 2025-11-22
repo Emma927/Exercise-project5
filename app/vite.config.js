@@ -31,15 +31,20 @@ export default defineConfig({
     // -nie renderuje komponentu w prawdziwej przeglądarce, tylko tworzy symulowany DOM (za pomocą jsdom) — w pamięci, w środowisku testowym.
     globals: true, // <- dodajemy globalne expect, test, describe - umożliwia to pomijanie importów:describe, expect, czy test z bibloteki vitest
     include: ['**/*.{spec,test}.{js,jsx}'],
+    exclude: ['**/node_modules/**', '**/dist/**', '**/e2e/**'],
     //setupFiles w konfiguracji Vitest (vitest.config.js) służy do inicjalizacji środowiska testowego przed każdym testem. Dzięki temu nie musisz powtarzać importu w każdym pliku testowym.
-    setupFiles: ['./setupTestes.js'], // <- inicjalizacja jest-dom
+    setupFiles: ['./src/setupTests.js'], // <- inicjalizacja jest-dom
     //Jeśli chcesz uruchomić więcej niż jeden plik setup:
     // setupFiles: ["./vitest.setup.js", "./anotherSetup.js"]
+    passWithNoTests: true, // <- pozwala zakończyć testy sukcesem jeśli brak plików
   },
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // Alias @ w resolve.alias pozwala używać skróconej ścieżki do katalogu src, co upraszcza importy.
+      '@': path.resolve('./src'), // Alias @ w resolve.alias pozwala używać skróconej ścieżki do katalogu src, co upraszcza importy.
     },
+  },
+  optimizeDeps: {
+    exclude: ['@playwright/test', 'playwright-core'],
   },
 });
