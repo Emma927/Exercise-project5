@@ -62,7 +62,7 @@ jobs:
 
       - name: Set proper tag name for Docker image
         run: |
-          TAG_NAME_LOWER="${GITHUB_REF_NAME,,}"
+          TAG_NAME_LOWER=$(echo "${GITHUB_REF_NAME,,}" | sed 's|/|-|g')
           echo "TAG_NAME=$TAG_NAME_LOWER" >> $GITHUB_ENV
         env:
           GITHUB_REF_NAME: ${{ github.ref_name }}
