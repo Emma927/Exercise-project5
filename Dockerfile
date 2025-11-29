@@ -34,6 +34,8 @@ RUN npm run build
 # Używamy lekkiego, bezpiecznego obrazu Nginx Alpine
 FROM nginx:alpine AS production_nginx
 
+# Załatanie nowych luk bezpieczeństwa jeśli się pojawią
+RUN apk update && apk upgrade 
 # Usuwamy domyślny plik konfiguracyjny Nginx, jeśli chcemy użyć własnego
 RUN rm /etc/nginx/conf.d/default.conf
 
